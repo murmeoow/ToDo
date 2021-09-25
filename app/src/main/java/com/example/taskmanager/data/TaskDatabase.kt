@@ -25,7 +25,7 @@ abstract class TaskDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         TaskDatabase::class.java,
-                        "tasks"
+                        "taskmanager"
                     )
                         .fallbackToDestructiveMigration()
                         .build()
