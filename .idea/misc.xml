@@ -4,12 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidProjects/TaskManager/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/TaskManager/app/src/main/res/layout/fragment_all_tasks.xml" value="0.24010416666666667" />
         <entry key="..\:/AndroidProjects/TaskManager/app/src/main/res/layout/fragment_habbits.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/TaskManager/app/src/main/res/layout/fragment_new_habit.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/TaskManager/app/src/main/res/layout/fragment_new_task.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/TaskManager/app/src/main/res/layout/fragment_planned_tasks.xml" value="0.2504528985507246" />
         <entry key="..\:/AndroidProjects/TaskManager/app/src/main/res/layout/fragment_tasks_list.xml" value="0.264" />
+        <entry key="..\:/AndroidProjects/TaskManager/app/src/main/res/layout/fragment_today_tasks.xml" value="0.2504528985507246" />
         <entry key="..\:/AndroidProjects/TaskManager/app/src/main/res/layout/task_item.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/TaskManager/app/src/main/res/menu/bottom_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/TaskManager/app/src/main/res/menu/drawer_menu.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/TaskManager/app/src/main/res/menu/drawer_navigation.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

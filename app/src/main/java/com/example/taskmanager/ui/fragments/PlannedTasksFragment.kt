@@ -1,4 +1,4 @@
-package com.example.taskmanager.ui
+package com.example.taskmanager.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,14 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.taskmanager.R
 
-class HabitsFragment : Fragment() {
+class PlannedTasksFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstaHabitsFragmentceState: Bundle?
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_habbits, container, false)
+        return inflater.inflate(R.layout.fragment_planned_tasks, container, false)
     }
+
 
 }

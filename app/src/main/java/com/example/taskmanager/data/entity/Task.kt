@@ -2,6 +2,8 @@ package com.example.taskmanager.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Date
+
 
 @Entity(tableName = "tasks")
 data class Task(
@@ -9,6 +11,6 @@ data class Task(
     val _id : Int?,
     val taskName : String,
     val taskDescription: String,
-    val taskDate : String,
+    val taskDate : Date,
     val status: Boolean
     )

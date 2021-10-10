@@ -3,9 +3,9 @@ package com.example.taskmanager.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taskmanager.R
+import com.example.taskmanager.Utils
 import com.example.taskmanager.data.entity.Task
 import com.example.taskmanager.databinding.TaskItemBinding
 
@@ -19,8 +19,11 @@ class TaskAdapter(): RecyclerView.Adapter<TaskAdapter.TaskHolder>() {
 
         fun bind(task : Task) = with(binding){
 
+            val formatted = Utils.formatDate(task.taskDate)
+
             tvTaskName.text = task.taskName
             tvTaskDescriptionList.text = task.taskDescription
+            tvDate.text = formatted
         }
     }
 

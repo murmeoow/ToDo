@@ -1,4 +1,4 @@
-package com.example.taskmanager.ui
+package com.example.taskmanager.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,21 +11,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taskmanager.R
-import com.example.taskmanager.databinding.FragmentTasksListBinding
+import com.example.taskmanager.databinding.FragmentTodayTasksBinding
 import com.example.taskmanager.ui.adapters.TaskAdapter
 import com.example.taskmanager.viewmodels.TaskViewModel
 import com.example.taskmanager.viewmodels.TaskViewModelFactory
 
-class TasksListFragment : Fragment() {
+class TodayTasksFragment : Fragment() {
 
-    private lateinit var binding: FragmentTasksListBinding
+    private lateinit var binding: FragmentTodayTasksBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_tasks_list, container, false)
+            inflater, R.layout.fragment_today_tasks, container, false)
 
         val application = requireNotNull(this.activity).application
 
@@ -44,7 +44,7 @@ class TasksListFragment : Fragment() {
         })
 
         binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(TasksListFragmentDirections.actionTasksListFragmentToNewTaskFragment())
+            findNavController().navigate(TodayTasksFragmentDirections.actionTasksListFragmentToNewTaskFragment())
         }
 
         return binding.root
