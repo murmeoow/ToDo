@@ -10,7 +10,7 @@ data class Task(
     @PrimaryKey(autoGenerate = true)
     val _id : Int?,
     val taskName : String,
-    val taskDescription: String,
-    val taskDate : Date,
+    val taskCreationDate: Date,
+    val taskDueDate : Date,
     val status: Boolean
     )

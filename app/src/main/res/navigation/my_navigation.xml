@@ -20,29 +20,7 @@
         <action
             android:id="@+id/action_newTaskFragment_to_tasksListFragment"
             app:destination="@id/todayTasksFragment" />
-        <action
-            android:id="@+id/action_newTaskFragment_to_allTasksFragment2"
-            app:destination="@id/allTasksFragment" />
-        <action
-            android:id="@+id/action_newTaskFragment_to_plannedTasksFragment"
-            app:destination="@id/plannedTasksFragment" />
+
     </fragment>
-    <fragment
-        android:id="@+id/allTasksFragment"
-        android:name="com.example.taskmanager.ui.fragments.AllTasksFragment"
-        android:label="fragment_all_tasks"
-        tools:layout="@layout/fragment_all_tasks" >
-        <action
-            android:id="@+id/action_allTasksFragment_to_newTaskFragment"
-            app:destination="@id/newTaskFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/plannedTasksFragment"
-        android:name="com.example.taskmanager.ui.fragments.PlannedTasksFragment"
-        android:label="fragment_planned_tasks"
-        tools:layout="@layout/fragment_planned_tasks" >
-        <action
-            android:id="@+id/action_plannedTasksFragment_to_newTaskFragment"
-            app:destination="@id/newTaskFragment" />
-    </fragment>
+
 </navigation>

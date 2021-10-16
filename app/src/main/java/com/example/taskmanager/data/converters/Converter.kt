@@ -1,4 +1,4 @@
-package com.example.taskmanager
+package com.example.taskmanager.data.converters
 
 import androidx.room.TypeConverter
 import java.util.Date

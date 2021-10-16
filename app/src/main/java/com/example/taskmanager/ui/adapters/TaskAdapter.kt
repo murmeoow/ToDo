@@ -19,11 +19,10 @@ class TaskAdapter(): RecyclerView.Adapter<TaskAdapter.TaskHolder>() {
 
         fun bind(task : Task) = with(binding){
 
-            val formatted = Utils.formatDate(task.taskDate)
+            val formatted = Utils.formatDate(task.taskDueDate)
 
             tvTaskName.text = task.taskName
-            tvTaskDescriptionList.text = task.taskDescription
-            tvDate.text = formatted
+            tvTaskDate.text = formatted
         }
     }
 

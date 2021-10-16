@@ -16,6 +16,7 @@ import java.util.*
 
 class NewTaskFragment() : Fragment() {
 
+    private lateinit var dueDate : Date
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -28,11 +29,21 @@ class NewTaskFragment() : Fragment() {
 
         val newTaskViewModel = ViewModelProvider(this, viewModelFactory).get(NewTaskViewModel::class.java)
 
+        var calendarView = binding.calendarView
+        val calendar = Calendar.getInstance()
+
+        calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
+            calendar.clear()
+            calendar.set(year,month,dayOfMonth)
+            dueDate = calendar.time
+        }
+
+
         binding.btnAddTask.setOnClickListener {
             var calendar = Calendar.getInstance()
-                //.get(Calendar.YEAR + Calendar.MONTH+Calendar.DAY_OF_MONTH)
-            val newTask = Task(null, binding.etTaskName.text.toString(),binding.etTaskDecsription.text.toString(),
-                                        calendar.time,false)
+
+            val newTask = Task(null, binding.etTaskName.text.toString(),calendar.time,
+                                        dueDate,false)
             newTaskViewModel.addTask(newTask)
             findNavController().navigate(NewTaskFragmentDirections.actionNewTaskFragmentToTasksListFragment())
         }

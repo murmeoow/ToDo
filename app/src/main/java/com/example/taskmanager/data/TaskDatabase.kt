@@ -5,11 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.taskmanager.Converter
+import com.example.taskmanager.data.converters.Converter
 import com.example.taskmanager.data.dao.TaskDao
 import com.example.taskmanager.data.entity.Task
 
-@Database(entities = [Task::class], version = 2, exportSchema = false)
+@Database(entities = [Task::class], version = 3, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class TaskDatabase : RoomDatabase() {
 

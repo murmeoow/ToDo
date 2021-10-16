@@ -4,76 +4,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:padding="8dp"
     tools:context="com.example.taskmanager.ui.fragments.NewTaskFragment">
 
-
-    <TextView
-        android:id="@+id/tv_task_bane"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Task name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et_task_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Task Name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_task_bane"
-        app:layout_constraintStart_toStartOf="@+id/tv_task_bane"
-        app:layout_constraintTop_toBottomOf="@+id/tv_task_bane" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_task_description"
-        android:layout_width="0dp"
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Task description"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/et_task_name"
         app:layout_constraintStart_toStartOf="@+id/et_task_name"
         app:layout_constraintTop_toBottomOf="@+id/et_task_name" />
-
-    <EditText
-        android:id="@+id/et_task_decsription"
-        android:layout_width="0dp"
-        android:layout_height="260dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/tv_task_description"
-        app:layout_constraintStart_toStartOf="@+id/tv_task_description"
-        app:layout_constraintTop_toBottomOf="@+id/tv_task_description"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <EditText
-        android:id="@+id/et_task_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="date"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/et_task_decsription"
-        app:layout_constraintStart_toStartOf="@+id/et_task_decsription"
-        app:layout_constraintTop_toBottomOf="@+id/et_task_decsription"
-        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/btn_add_task"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="Add task"
-        app:layout_constraintEnd_toEndOf="@+id/et_task_date"
-        app:layout_constraintStart_toStartOf="@+id/et_task_date"
-        app:layout_constraintTop_toBottomOf="@+id/et_task_date" />
+        app:layout_constraintEnd_toEndOf="@+id/calendarView"
+        app:layout_constraintStart_toStartOf="@+id/calendarView"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
