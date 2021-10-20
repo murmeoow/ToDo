@@ -9,7 +9,7 @@ import com.example.taskmanager.data.converters.Converter
 import com.example.taskmanager.data.dao.TaskDao
 import com.example.taskmanager.data.entity.Task
 
-@Database(entities = [Task::class], version = 3, exportSchema = false)
+@Database(entities = [Task::class], version = 4, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class TaskDatabase : RoomDatabase() {
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taskmanager.R
 import com.example.taskmanager.databinding.FragmentTodayTasksBinding
 import com.example.taskmanager.ui.adapters.TaskAdapter
+import com.example.taskmanager.ui.adapters.TaskClickListener
 import com.example.taskmanager.viewmodels.TaskViewModel
 import com.example.taskmanager.viewmodels.TaskViewModelFactory
 
@@ -36,11 +37,21 @@ class TodayTasksFragment : Fragment() {
         binding.taskViewModel = taskViewModel
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        val adapter = TaskAdapter()
+        val adapter = TaskAdapter(TaskClickListener {
+            taskId -> taskViewModel.onTaskClicked(taskId)
+        })
         binding.recyclerView.adapter = adapter
 
+        taskViewModel.navigateToUpdateTask.observe(viewLifecycleOwner, Observer {
+            task ->
+            task?.let{
+                findNavController().navigate(TodayTasksFragmentDirections.actionTasksListFragmentToNewTaskFragment(task))
+                taskViewModel.onTaskUpdateNavigated()
+            }
+        })
+
         taskViewModel.allTasks.observe(viewLifecycleOwner, Observer { task ->
-            adapter.setTaskList(task)
+            adapter.submitList(task)
         })
 
         binding.floatingActionButton.setOnClickListener {

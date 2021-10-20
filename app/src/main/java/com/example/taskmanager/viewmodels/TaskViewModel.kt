@@ -22,5 +22,15 @@ class TaskViewModel(application: Application): ViewModel() {
         allTasks = repository.allTasks
     }
 
+    private val _navigateToUpdateTask = MutableLiveData<Int>()
+    val navigateToUpdateTask
+        get() = _navigateToUpdateTask
 
+    fun onTaskClicked(id : Int){
+        _navigateToUpdateTask.value = id
+    }
+
+    fun onTaskUpdateNavigated(){
+        _navigateToUpdateTask.value = null
+    }
 }

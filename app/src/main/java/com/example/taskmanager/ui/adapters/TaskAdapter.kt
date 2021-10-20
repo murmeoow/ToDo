@@ -3,26 +3,29 @@ package com.example.taskmanager.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taskmanager.R
 import com.example.taskmanager.Utils
 import com.example.taskmanager.data.entity.Task
 import com.example.taskmanager.databinding.TaskItemBinding
 
-class TaskAdapter(): RecyclerView.Adapter<TaskAdapter.TaskHolder>() {
 
-    private var taskList = listOf<Task>()
+class TaskAdapter(val taskClickListener: TaskClickListener): ListAdapter<Task, TaskAdapter.TaskHolder>(TaskDiffCallback())  {
 
     class TaskHolder(item: View): RecyclerView.ViewHolder(item) {
 
         val binding = TaskItemBinding.bind(item)
 
-        fun bind(task : Task) = with(binding){
+        fun bind(task: Task, taskClickListener: TaskClickListener) = with(binding){
 
             val formatted = Utils.formatDate(task.taskDueDate)
-
+            taskVar = task
+            clickListener = taskClickListener
             tvTaskName.text = task.taskName
             tvTaskDate.text = formatted
+            executePendingBindings()
         }
     }
 
@@ -32,14 +35,23 @@ class TaskAdapter(): RecyclerView.Adapter<TaskAdapter.TaskHolder>() {
     }
 
     override fun onBindViewHolder(holder: TaskAdapter.TaskHolder, position: Int) {
-        holder.bind(taskList[position])
+        holder.bind(getItem(position)!!, taskClickListener)
     }
 
-    override fun getItemCount() = taskList.size
 
-    fun setTaskList(task : List<Task>){
-        this.taskList = task
-        notifyDataSetChanged()
+}
+
+class TaskDiffCallback : DiffUtil.ItemCallback<Task>() {
+    override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
+        return oldItem._id == newItem._id
     }
 
+    override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
+        return oldItem == newItem
+    }
+}
+
+
+class TaskClickListener(val clickListener : (taskId : Int ) -> Unit){
+    fun onClick(task: Task) = task._id?.let { clickListener(it) }
 }
