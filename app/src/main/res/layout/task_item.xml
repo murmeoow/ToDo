@@ -16,15 +16,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:onClick="@{() -> clickListener.onClick(taskVar)}">
+      >
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_task_name" />
 
         <TextView
             android:id="@+id/tv_task_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
+            android:onClick="@{() -> clickListener.onClick(taskVar)}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/checkBox"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -32,6 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:onClick="@{() -> clickListener.onClick(taskVar)}"
             app:layout_constraintEnd_toEndOf="@+id/tv_task_name"
             app:layout_constraintStart_toStartOf="@+id/tv_task_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_task_name" />

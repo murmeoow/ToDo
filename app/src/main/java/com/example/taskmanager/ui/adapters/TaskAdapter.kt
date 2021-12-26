@@ -1,5 +1,6 @@
 package com.example.taskmanager.ui.adapters
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +13,13 @@ import com.example.taskmanager.data.entity.Task
 import com.example.taskmanager.databinding.TaskItemBinding
 
 
-class TaskAdapter(val taskClickListener: TaskClickListener): ListAdapter<Task, TaskAdapter.TaskHolder>(TaskDiffCallback())  {
+class TaskAdapter(val taskClickListener: TaskClickListener,
+                    val checkBoxClickListener: (Task, Boolean) -> Unit): ListAdapter<Task, TaskAdapter.TaskHolder>(TaskDiffCallback())  {
 
-    class TaskHolder(item: View): RecyclerView.ViewHolder(item) {
+    inner class TaskHolder(item: View): RecyclerView.ViewHolder(item) {
 
         val binding = TaskItemBinding.bind(item)
+
 
         fun bind(task: Task, taskClickListener: TaskClickListener) = with(binding){
 
@@ -24,7 +27,12 @@ class TaskAdapter(val taskClickListener: TaskClickListener): ListAdapter<Task, T
             taskVar = task
             clickListener = taskClickListener
             tvTaskName.text = task.taskName
+            tvTaskName.paint.isStrikeThruText = task.status
             tvTaskDate.text = formatted
+            checkBox.isChecked = task.status
+            checkBox.setOnClickListener {
+                checkBoxClickListener(task, checkBox.isChecked)
+            }
             executePendingBindings()
         }
     }
