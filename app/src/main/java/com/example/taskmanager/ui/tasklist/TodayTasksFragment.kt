@@ -1,4 +1,4 @@
-package com.example.taskmanager.ui.fragments
+package com.example.taskmanager.ui.tasklist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,12 +13,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taskmanager.R
-import com.example.taskmanager.data.entity.Task
 import com.example.taskmanager.databinding.FragmentTodayTasksBinding
 import com.example.taskmanager.ui.adapters.TaskAdapter
 import com.example.taskmanager.ui.adapters.TaskClickListener
-import com.example.taskmanager.viewmodels.TaskViewModel
-import com.example.taskmanager.viewmodels.TaskViewModelFactory
+import com.example.taskmanager.ui.newtask.NewTaskFragment
 
 class TodayTasksFragment : Fragment() {
 
@@ -28,8 +26,8 @@ class TodayTasksFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_today_tasks, container, false)
+        binding = FragmentTodayTasksBinding.inflate(
+            inflater,  container, false)
 
         val application = requireNotNull(this.activity).application
 
@@ -37,7 +35,8 @@ class TodayTasksFragment : Fragment() {
 
         val taskViewModel = ViewModelProvider(this, viewModelFactory).get(TaskViewModel::class.java)
 
-        binding.taskViewModel = taskViewModel
+        val bottomSheet = NewTaskFragment()
+
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         val adapter = TaskAdapter(TaskClickListener {
@@ -70,7 +69,10 @@ class TodayTasksFragment : Fragment() {
         taskViewModel.navigateToUpdateTask.observe(viewLifecycleOwner, Observer {
             task ->
             task?.let{
-                findNavController().navigate(TodayTasksFragmentDirections.actionTasksListFragmentToNewTaskFragment(task))
+                val bundle = Bundle()
+                bundle.putInt("taskId", task)
+                bottomSheet.arguments = bundle
+                bottomSheet.show(parentFragmentManager, "ModalBottomSheet")
                 taskViewModel.onTaskUpdateNavigated()
             }
         })
@@ -80,7 +82,10 @@ class TodayTasksFragment : Fragment() {
         })
 
         binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(TodayTasksFragmentDirections.actionTasksListFragmentToNewTaskFragment())
+            val bundle = Bundle()
+            bundle.putInt("taskId", -1)
+            bottomSheet.arguments = bundle
+            bottomSheet.show(parentFragmentManager, "ModalBottomSheet")
         }
 
         return binding.root

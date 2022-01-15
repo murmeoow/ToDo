@@ -1,4 +1,4 @@
-package com.example.taskmanager.viewmodels
+package com.example.taskmanager.ui.newtask
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -12,7 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.launch
 
-class NewTaskViewModel(private val taskId: Int, application: Application) : ViewModel() {
+class NewTaskViewModel(
+    private val taskId: Int,
+    application: Application) : ViewModel() {
 
     private val repository : TaskRepository
     val currentTask : LiveData<Task>

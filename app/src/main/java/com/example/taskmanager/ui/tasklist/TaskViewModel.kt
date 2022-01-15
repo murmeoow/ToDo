@@ -1,4 +1,4 @@
-package com.example.taskmanager.viewmodels
+package com.example.taskmanager.ui.tasklist
 
 import android.app.Application
 import androidx.lifecycle.LiveData

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/todayTasksFragment"
-        android:name="com.example.taskmanager.ui.fragments.TodayTasksFragment"
+        android:name="com.example.taskmanager.ui.tasklist.TodayTasksFragment"
         android:label="Today tasks">
         <action
             android:id="@+id/action_tasksListFragment_to_newTaskFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/newTaskFragment"
-        android:name="com.example.taskmanager.ui.fragments.NewTaskFragment"
+        android:name="com.example.taskmanager.ui.newtask.NewTaskFragment"
         android:label="Add task"
         tools:layout="@layout/fragment_new_task">
         <action

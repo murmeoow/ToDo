@@ -4,9 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
     android:padding="8dp"
-    tools:context="com.example.taskmanager.ui.fragments.NewTaskFragment">
+    tools:context="com.example.taskmanager.ui.newtask.NewTaskFragment">
 
 
     <EditText
@@ -18,7 +20,7 @@
         android:hint="Task Name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_add_task"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,18 +28,26 @@
         android:id="@+id/calendarView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/et_task_name"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/btn_add_task"
         app:layout_constraintStart_toStartOf="@+id/et_task_name"
-        app:layout_constraintTop_toBottomOf="@+id/et_task_name" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btn_add_task"
-        android:layout_width="0dp"
+        android:layout_width="48dp"
+        android:layout_height="0dp"
+        android:text="+"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_task_name" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Add task"
-        app:layout_constraintEnd_toEndOf="@+id/calendarView"
-        app:layout_constraintStart_toStartOf="@+id/calendarView"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+        android:minHeight="48dp"
+        android:src="@drawable/ic_baseline_calendar_today_24"
+        app:layout_constraintStart_toStartOf="@+id/et_task_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_task_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
