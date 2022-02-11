@@ -12,19 +12,16 @@
             android:id="@+id/action_tasksListFragment_to_newTaskFragment"
             app:destination="@id/newTaskFragment" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/newTaskFragment"
         android:name="com.example.taskmanager.ui.newtask.NewTaskFragment"
         android:label="Add task"
         tools:layout="@layout/fragment_new_task">
-        <action
-            android:id="@+id/action_newTaskFragment_to_tasksListFragment"
-            app:destination="@id/todayTasksFragment" />
         <argument
             android:name="taskId"
             app:argType="integer"
             android:defaultValue="-1" />
 
-    </fragment>
+    </dialog>
 
 </navigation>

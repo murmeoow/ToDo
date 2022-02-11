@@ -10,5 +10,6 @@ class Utils {
             val formatter = SimpleDateFormat("EEE, MMM, d")
             return formatter.format(date)
         }
+
     }
 }

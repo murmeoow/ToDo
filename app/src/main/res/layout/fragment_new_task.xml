@@ -24,16 +24,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/btn_add_task"
-        app:layout_constraintStart_toStartOf="@+id/et_task_name"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton"
-        tools:visibility="visible" />
-
     <Button
         android:id="@+id/btn_add_task"
         android:layout_width="48dp"
@@ -49,5 +39,6 @@
         android:minHeight="48dp"
         android:src="@drawable/ic_baseline_calendar_today_24"
         app:layout_constraintStart_toStartOf="@+id/et_task_name"
-        app:layout_constraintTop_toBottomOf="@+id/et_task_name" />
+        app:layout_constraintTop_toBottomOf="@+id/et_task_name"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

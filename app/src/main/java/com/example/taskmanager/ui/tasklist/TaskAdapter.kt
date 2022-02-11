@@ -13,7 +13,7 @@ import com.example.taskmanager.data.entity.Task
 import com.example.taskmanager.databinding.TaskItemBinding
 
 
-class TaskAdapter(val taskClickListener: TaskClickListener,
+class TaskAdapter(val taskClickListener: (Int)-> Unit,
                     val checkBoxClickListener: (Task, Boolean) -> Unit): ListAdapter<Task, TaskAdapter.TaskHolder>(TaskDiffCallback())  {
 
     inner class TaskHolder(item: View): RecyclerView.ViewHolder(item) {
@@ -21,11 +21,9 @@ class TaskAdapter(val taskClickListener: TaskClickListener,
         val binding = TaskItemBinding.bind(item)
 
 
-        fun bind(task: Task, taskClickListener: TaskClickListener) = with(binding){
+        fun bind(task: Task) = with(binding){
 
             val formatted = Utils.formatDate(task.taskDueDate)
-            taskVar = task
-            clickListener = taskClickListener
             tvTaskName.text = task.taskName
             tvTaskName.paint.isStrikeThruText = task.status
             tvTaskDate.text = formatted
@@ -33,7 +31,9 @@ class TaskAdapter(val taskClickListener: TaskClickListener,
             checkBox.setOnClickListener {
                 checkBoxClickListener(task, checkBox.isChecked)
             }
-            executePendingBindings()
+            tvTaskName.setOnClickListener{
+                task._id?.let { it1 -> taskClickListener(it1) }
+            }
         }
     }
 
@@ -43,7 +43,7 @@ class TaskAdapter(val taskClickListener: TaskClickListener,
     }
 
     override fun onBindViewHolder(holder: TaskAdapter.TaskHolder, position: Int) {
-        holder.bind(getItem(position)!!, taskClickListener)
+        holder.bind(getItem(position)!!)
     }
 
 
@@ -60,6 +60,6 @@ class TaskDiffCallback : DiffUtil.ItemCallback<Task>() {
 }
 
 
-class TaskClickListener(val clickListener : (taskId : Int ) -> Unit){
-    fun onClick(task: Task) = task._id?.let { clickListener(it) }
-}
+//class TaskClickListener(val clickListener : (taskId : Int ) -> Unit){
+//    fun onClick(task: Task) = task._id?.let { clickListener(it) }
+//}

@@ -3,8 +3,9 @@ package com.example.taskmanager.repository
 import androidx.lifecycle.LiveData
 import com.example.taskmanager.data.dao.TaskDao
 import com.example.taskmanager.data.entity.Task
+import javax.inject.Inject
 
-class TaskRepository(private val tasksDao: TaskDao) {
+class TaskRepository @Inject constructor(private val tasksDao: TaskDao) {
 
     val allTasks : LiveData<List<Task>> = tasksDao.getAllTasks()
 

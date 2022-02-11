@@ -8,19 +8,16 @@ import androidx.lifecycle.viewModelScope
 import com.example.taskmanager.data.TaskDatabase
 import com.example.taskmanager.data.entity.Task
 import com.example.taskmanager.repository.TaskRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TaskViewModel(application: Application): ViewModel() {
-
-    private val repository : TaskRepository
+@HiltViewModel
+class TaskViewModel @Inject constructor(private val repository: TaskRepository): ViewModel() {
 
     val allTasks: LiveData<List<Task>>
-//    val _allTasks : MutableLiveData<List<Task>>
-//    get() = allTasks
 
     init {
-        val dao =TaskDatabase.getInstance(application).taskDao
-        repository = TaskRepository(dao)
         allTasks = repository.allTasks
     }
 
