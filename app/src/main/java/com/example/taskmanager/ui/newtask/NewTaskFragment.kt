@@ -7,35 +7,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.taskmanager.data.entity.Task
 import com.example.taskmanager.databinding.FragmentNewTaskBinding
+import com.example.taskmanager.ui.tasklist.TaskViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+@AndroidEntryPoint
 class NewTaskFragment() : BottomSheetDialogFragment() {
 
     private lateinit var dueDate : Date
     private lateinit var currentTask : Task
+    private val newTaskViewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
 
         val binding = FragmentNewTaskBinding.inflate(inflater, container, false )
 
-        val application = requireNotNull(this.activity).application
-
         val args = NewTaskFragmentArgs.fromBundle(requireArguments())
-
-        val viewModelFactory = NewTaskViewModelFactory(args.taskId, application)
-
-        val newTaskViewModel = ViewModelProvider(this, viewModelFactory).get(NewTaskViewModel::class.java)
-
 
         val calendar = Calendar.getInstance()
 
@@ -50,14 +47,9 @@ class NewTaskFragment() : BottomSheetDialogFragment() {
         }
 
         if (args.taskId != -1) {
-
-            newTaskViewModel.currentTask.observe(viewLifecycleOwner, {
-
-                currentTask =  it
+                currentTask =  newTaskViewModel.getTaskWithId(args.taskId)
                 binding.etTaskName.setText(currentTask.taskName)
                 dueDate = currentTask.taskDueDate
-
-            })
         }
 
         binding.btnAddTask.setOnClickListener {

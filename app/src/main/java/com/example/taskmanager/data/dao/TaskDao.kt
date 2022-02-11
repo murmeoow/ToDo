@@ -17,7 +17,7 @@ interface TaskDao {
     fun getAllTasks() : LiveData<List<Task>>
 
     @Query("select * from tasks where _id= :taskId")
-    fun getTaskWithId(taskId : Int): LiveData<Task>
+    fun getTaskWithId(taskId : Int): Task
 
     @Update
     suspend fun updateTask(task: Task)

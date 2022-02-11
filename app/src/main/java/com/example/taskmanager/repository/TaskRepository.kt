@@ -21,7 +21,7 @@ class TaskRepository @Inject constructor(private val tasksDao: TaskDao) {
         tasksDao.updateTask(task)
     }
 
-    fun getTaskWithId(taskId: Int): LiveData<Task> {
+    fun getTaskWithId(taskId: Int): Task {
         return tasksDao.getTaskWithId(taskId)
     }
 

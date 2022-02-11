@@ -9,6 +9,7 @@ import com.example.taskmanager.data.TaskDatabase
 import com.example.taskmanager.data.entity.Task
 import com.example.taskmanager.repository.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,5 +41,18 @@ class TaskViewModel @Inject constructor(private val repository: TaskRepository):
     fun onTaskSwiped(task : Task ) = viewModelScope.launch {
         repository.deleteTask(task)
 
+    }
+
+    fun addTask(task : Task) = viewModelScope.launch(Dispatchers.IO){
+        repository.insertTask(task)
+    }
+
+
+    fun updateTask(task : Task) = viewModelScope.launch(Dispatchers.IO){
+        repository.updateTask(task)
+    }
+
+    fun getTaskWithId(id: Int): Task{
+        return repository.getTaskWithId(id)
     }
 }
