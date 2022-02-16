@@ -14,7 +14,8 @@ import com.example.taskmanager.databinding.TaskItemBinding
 
 
 class TaskAdapter(val taskClickListener: (Int)-> Unit,
-                    val checkBoxClickListener: (Task, Boolean) -> Unit): ListAdapter<Task, TaskAdapter.TaskHolder>(TaskDiffCallback())  {
+                    val checkBoxClickListener: (Task, Boolean) -> Unit,
+                    val deleteClickListener: (Task)-> Unit): ListAdapter<Task, TaskAdapter.TaskHolder>(TaskDiffCallback())  {
 
     inner class TaskHolder(item: View): RecyclerView.ViewHolder(item) {
 
@@ -28,6 +29,9 @@ class TaskAdapter(val taskClickListener: (Int)-> Unit,
             tvTaskName.paint.isStrikeThruText = task.status
             tvTaskDate.text = formatted
             checkBox.isChecked = task.status
+            ivDelete.setOnClickListener {
+                deleteClickListener(task)
+            }
             checkBox.setOnClickListener {
                 checkBoxClickListener(task, checkBox.isChecked)
             }
@@ -43,7 +47,7 @@ class TaskAdapter(val taskClickListener: (Int)-> Unit,
     }
 
     override fun onBindViewHolder(holder: TaskAdapter.TaskHolder, position: Int) {
-        holder.bind(getItem(position)!!)
+        holder.bind(getItem(position))
     }
 
 

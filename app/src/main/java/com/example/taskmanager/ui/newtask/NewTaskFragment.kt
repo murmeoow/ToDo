@@ -47,9 +47,13 @@ class NewTaskFragment() : BottomSheetDialogFragment() {
         }
 
         if (args.taskId != -1) {
-                currentTask =  newTaskViewModel.getTaskWithId(args.taskId)
+            newTaskViewModel.getTaskWithId(args.taskId)
+            newTaskViewModel.currentTask.observe(viewLifecycleOwner,{
+                currentTask = it
                 binding.etTaskName.setText(currentTask.taskName)
                 dueDate = currentTask.taskDueDate
+            })
+
         }
 
         binding.btnAddTask.setOnClickListener {

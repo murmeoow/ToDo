@@ -34,32 +34,18 @@ class TodayTasksFragment : Fragment() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         val adapter = TaskAdapter({
-            taskId ->
-            taskId?.let { taskViewModel.onTaskClicked(it) }
-        }) { task, isChecked ->
-            task?.let {
-                taskViewModel.onTaskChecked(task, isChecked)
-            }
+                taskId ->
+                taskId?.let { taskViewModel.onTaskClicked(it) }
+            }, { task, isChecked ->
+                task?.let {
+                    taskViewModel.onTaskChecked(task, isChecked)
+                }
+            }, {
+                task -> taskViewModel.onTaskDelete(task)
+            })
 
-        }
         binding.recyclerView.adapter = adapter
 
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0,
-        ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val task = adapter.currentList[viewHolder.adapterPosition]
-                taskViewModel.onTaskSwiped(task)
-            }
-
-        }).attachToRecyclerView(binding.recyclerView)
 
         taskViewModel.navigateToUpdateTask.observe(viewLifecycleOwner, Observer {
             task ->
