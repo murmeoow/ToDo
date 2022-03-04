@@ -11,6 +11,6 @@ data class Task(
     val _id : Int?,
     val taskName : String,
     val taskCreationDate: Date,
-    val taskDueDate : Date,
+    val taskDueDate : Date?,
     val status: Boolean
     )

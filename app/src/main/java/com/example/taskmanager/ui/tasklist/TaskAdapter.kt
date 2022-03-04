@@ -24,7 +24,7 @@ class TaskAdapter(val taskClickListener: (Int)-> Unit,
 
         fun bind(task: Task) = with(binding){
 
-            val formatted = Utils.formatDate(task.taskDueDate)
+            val formatted = task.taskDueDate?.let { Utils.formatDate(it) }
             tvTaskName.text = task.taskName
             tvTaskName.paint.isStrikeThruText = task.status
             tvTaskDate.text = formatted

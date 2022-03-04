@@ -1,10 +1,7 @@
 package com.example.taskmanager.ui.tasklist
 
 import android.app.Application
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.taskmanager.data.TaskDatabase
 import com.example.taskmanager.data.entity.Task
 import com.example.taskmanager.repository.TaskRepository
@@ -19,9 +16,6 @@ import javax.inject.Inject
 class TaskViewModel @Inject constructor(private val repository: TaskRepository): ViewModel() {
 
     val allTasks: LiveData<List<Task>> = repository.allTasks
-    private val _currentTask: MutableLiveData<Task> = MutableLiveData<Task>()
-    val currentTask
-        get() = _currentTask
 
     private val _navigateToUpdateTask = MutableLiveData<Int>()
     val navigateToUpdateTask
@@ -44,16 +38,11 @@ class TaskViewModel @Inject constructor(private val repository: TaskRepository):
 
     }
 
-    fun addTask(task : Task) = viewModelScope.launch(Dispatchers.IO){
-        repository.insertTask(task)
+    fun searchDatabase(searchQuery: String): LiveData<List<Task>>{
+        return repository.searchDatabase(searchQuery).asLiveData()
     }
 
 
-    fun updateTask(task : Task) = viewModelScope.launch(Dispatchers.IO){
-        repository.updateTask(task)
-    }
 
-    fun getTaskWithId(id: Int) = viewModelScope.launch {
-        _currentTask.value = repository.getTaskWithId(id)
-    }
+
 }

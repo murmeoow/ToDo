@@ -22,62 +22,61 @@ import java.util.*
 @AndroidEntryPoint
 class NewTaskFragment() : BottomSheetDialogFragment() {
 
-    private lateinit var dueDate : Date
-    private lateinit var currentTask : Task
-    private val newTaskViewModel: TaskViewModel by viewModels()
+    private var dueDate : Date? = null
+    private var currentTask : Task? = null
+    private val newTaskViewModel: NewTaskViewModel by viewModels()
+    private val calendar = Calendar.getInstance()
+    private lateinit var binding: FragmentNewTaskBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
 
-        val binding = FragmentNewTaskBinding.inflate(inflater, container, false )
+        binding = FragmentNewTaskBinding.inflate(inflater, container, false )
 
-        val args = NewTaskFragmentArgs.fromBundle(requireArguments())
+        getPickedTask()
 
-        val calendar = Calendar.getInstance()
-
-        binding.imageButton.setOnClickListener{
-            val datePicker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select date")
-                .build()
-            datePicker.show(parentFragmentManager, "")
-            datePicker.addOnPositiveButtonClickListener {
-                dueDate= Date(it)
-            }
-        }
-
-        if (args.taskId != -1) {
-            newTaskViewModel.getTaskWithId(args.taskId)
-            newTaskViewModel.currentTask.observe(viewLifecycleOwner,{
-                currentTask = it
-                binding.etTaskName.setText(currentTask.taskName)
-                dueDate = currentTask.taskDueDate
-            })
-
+        binding.ibCalendar.setOnClickListener{
+            setDate()
         }
 
         binding.btnAddTask.setOnClickListener {
-
-            if (args.taskId != -1){
-                val editedTask = Task(
-                    currentTask._id, binding.etTaskName.text.toString(), calendar.time,
-                    dueDate, false
-                )
-                newTaskViewModel.updateTask(editedTask)
-                findNavController().popBackStack()
+            if (currentTask!=null) {
+                newTaskViewModel.updateTask(
+                    Task(currentTask?._id, binding.etTaskName.text.toString(), calendar.time,
+                    dueDate, false))
             }else {
-                val newTask = Task(
+                newTaskViewModel.addTask(Task(
                     null, binding.etTaskName.text.toString(), calendar.time,
-                    dueDate, false
-                )
-                newTaskViewModel.addTask(newTask)
-                findNavController().popBackStack()
+                    dueDate, false))
             }
+            findNavController().popBackStack()
 
         }
 
         return binding.root
     }
 
+    private fun setDate(){
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("Select date")
+            .build()
+        datePicker.show(parentFragmentManager, "")
+        datePicker.addOnPositiveButtonClickListener {
+            dueDate= Date(it)
+        }
+    }
 
+    private fun getPickedTask(){
+        val args = NewTaskFragmentArgs.fromBundle(requireArguments())
+        if (args.taskId != -1) {
+            newTaskViewModel.getTaskWithId(args.taskId)
+            newTaskViewModel.currentTask.observe(viewLifecycleOwner,{
+                currentTask = it
+                binding.etTaskName.setText(currentTask?.taskName)
+                dueDate = currentTask?.taskDueDate
+            })
+
+        }
+    }
 }

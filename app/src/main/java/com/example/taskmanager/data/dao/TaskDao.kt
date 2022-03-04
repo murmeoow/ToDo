@@ -3,6 +3,7 @@ package com.example.taskmanager.data.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.taskmanager.data.entity.Task
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDao {
@@ -22,4 +23,6 @@ interface TaskDao {
     @Update
     suspend fun updateTask(task: Task)
 
+    @Query("SELECT * FROM tasks WHERE taskName LIKE '%' || :searchQuery || '%'")
+    fun searchDatabase(searchQuery: String): Flow<List<Task>>
 }
